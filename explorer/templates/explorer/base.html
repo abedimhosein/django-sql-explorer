@@ -12,7 +12,7 @@
         {% vite_asset 'scss/styles.scss' %}
     {% endblock style %}
 
-    <script type="text/javascript">
+    <script type="text/javascript" nonce="{{ CSP_NONCE }}">
         csrfCookieName = "{% firstof csrf_cookie_name 'csrftoken' %}";
         csrfCookieHttpOnly = "{% firstof csrf_cookie_httponly False %}" === "True";
         clientRoute = "{{ request.resolver_match.url_name }}"
@@ -26,9 +26,7 @@
         <h1>Looks like Vite isn't running</h1>
         <h2>This is easy to fix, I promise!</h2>
         <div>You can run:</div>
-            <pre>
-npm run dev
-            </pre>
+        <pre>npm run dev</pre>
         <div>Then refresh this page, and you'll get all of your styles, JS, and hot-reloading.</div>
         <div>If this is the first time you are running the project, then run:</div>
         <pre>
@@ -54,7 +52,8 @@ npm run dev
                     </li>
                     <li class="nav-item">
                         <a class="nav-link{% if not query and view_name == 'explorer_playground' %} active{% endif %}"
-                           href="{% url 'explorer_playground' %}"><i class="small me-1 bi-code-square"></i>{% trans "Playground" %}</a>
+                           href="{% url 'explorer_playground' %}"><i
+                            class="small me-1 bi-code-square"></i>{% trans "Playground" %}</a>
                     </li>
                 {% endif %}
                 <li class="nav-item">
@@ -68,13 +67,14 @@ npm run dev
             </ul>
         </div>
     </nav>
-{% block sql_explorer_content %}{% endblock %}
+    {% block sql_explorer_content %}{% endblock %}
 {% endblock %}
 {% block sql_explorer_footer %}
     <div class="container">
         <footer class="py-3 my-4">
             <p class="text-center text-body-secondary border-top pt-3">
-                Powered by <a href="https://www.github.com/chrisclark/django-sql-explorer/">django-sql-explorer</a>. Rendered at {% now "SHORT_DATETIME_FORMAT" %}
+                Powered by <a href="https://www.github.com/chrisclark/django-sql-explorer/">django-sql-explorer</a>.
+                Rendered at {% now "SHORT_DATETIME_FORMAT" %}
             </p>
         </footer>
     </div>
